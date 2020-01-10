@@ -14,19 +14,25 @@ public class ExampleContoller {
 	@RequestMapping(value="/")
 	public String main(Model model, HttpServletRequest request) {
 		
-		model.addAttribute("test", "안녕하세요");
+		model.addAttribute("test");
 		
 		
 		
 		System.out.println("java spring test - project name 'first spring");
-		
-		String url = "https://sports.news.naver.com/index.nhn";
+		String code = "005930";
+		String url = "https://finance.naver.com/item/main.nhn?code="+code;
 		try {
 			Document doc = Jsoup.connect(url).get();
-			Elements doctag = doc.body().getElementsByClass("sports_home");
-			String context = doctag.text();
+			Elements nametag = doc.body().getElementsByClass("wrap_company");
+			Elements nametag2 = nametag.select("h2");
+			Elements doctag = doc.body().getElementsByClass("no_today");
+			Elements today_no = doctag.select("em");
+			
+			String n_context = nametag2.text(); //b
+			String context = today_no.text();   //a
 			model.addAttribute("a",context);
-			//Elements docimgtag2 = doc.body().getElementByClass
+			model.addAttribute("b", n_context);
+			
 		}catch(Exception e) {
 			System.out.println(e);
 		}
