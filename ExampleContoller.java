@@ -27,11 +27,16 @@ public class ExampleContoller {
 			Elements nametag2 = nametag.select("h2");
 			Elements doctag = doc.body().getElementsByClass("no_today");
 			Elements today_no = doctag.select("em");
+			Elements ex_day = doc.body().getElementsByClass("no_exday");
+			Elements ex_day2 = ex_day.select("em");
 			
-			String n_context = nametag2.text(); //b
 			String context = today_no.text();   //a
-			model.addAttribute("a",context);
-			model.addAttribute("b", n_context);
+			String n_context = nametag2.text(); //b
+			String e_context = ex_day2.text(); //c
+			
+			model.addAttribute("a",n_context);
+			model.addAttribute("b", context);
+			model.addAttribute("c", e_context);
 			
 		}catch(Exception e) {
 			System.out.println(e);
